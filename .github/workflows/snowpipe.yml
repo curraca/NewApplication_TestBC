@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: ServiceNow CI/CD Pipeline with QualityClouds LiveCheck
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    # Purpose of this job is to Apply Remote Changes for the branch triggering 
+    # the pipeline build to the Dev instance, then publish the application to 
+    # app repo using the template versioning format. 
+    name: Publish from Dev
+    runs-on: ubuntu-latest
+    # Below line can be used to set conditionals for modifying your pipeline as needed.
+    # if: ${{ github.event_name == 'pull_request'}}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: QualityClouds CI/CD BuildCheck for Servicenow
+        uses: qualityclouds/action-snow-full-scan@0.0.5
+        with:
+          token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImVjYmQ5YWJkZjBjMjJlMWE0MjVkNjFkZDg1YzdlNTczYTE3MjMwZmMzOWY5NzkwOWJkYWVhNDJkOTI5NmZmZWIyZTMwMTNhNTM1MmQ4YWQ0In0.eyJhdWQiOiIyIiwianRpIjoiZWNiZDlhYmRmMGMyMmUxYTQyNWQ2MWRkODVjN2U1NzNhMTcyMzBmYzM5Zjk3OTA5YmRhZWE0MmQ5Mjk2ZmZlYjJlMzAxM2E1MzUyZDhhZDQiLCJpYXQiOjE2Mzc1ODg1MTksIm5iZiI6MTYzNzU4ODUxOSwiZXhwIjoxNjY5MTI0NTE5LCJzdWIiOiI3OTEiLCJzY29wZXMiOlsibGl2ZS1jaGVjayJdfQ.fUl5DM1KiHtnxYHMXl_N_VSe9XlT6mILeDMJfHY3yJ3oMQikcs474HquP9daH9GwyUcV-ne_yK9e9XmGaGLI44tn8ZDvFP2d64fHsgrWmavbnLj0DXy7xJh_Xkve9Avh2pVSdbMJRZzWaEN0wTd_auyaeRBXquNAGDUqw9k89bndsnNPQWT2FDyC5If7435lK4G1rwmG7lBT_fCg6kXCpb-rGy5ASW6hi5sz9TpognryPG4WUpl_clIcP8rPFGabAZ6VqOYIqB3-g2W1tCkMMYQr1kBsIsurFTGGiGRyWrBKkPwmEAVvLNNaZop0VUa0WqDT_OuMR5_eGJ9cvxgP_0XQEob0qSJuXrn0hjqAJBUhtgUN_La0MEUgLVSKlEUyK3xpvY6W1iMfGF3X3vEfFbASl5MRBBj33-4BD9xKdAWvlcmO_iQxUWGWnpo2DK-ISDkW17S9ibIOLG39lwsH4K004YSjG7isIHW3mVfdncCAVNsD1OLC42CQiW7b6CFJDQlczb0-qMnWRvZ81DrYEzsS9MK4s1fPdO2tq1vnaDMgUMlIk-oI2Z5tSULdNizS6UVv08jqkeGUFkVgThExmfs6EYIkv-uvB8TMcwGcUBkMDDPjpRsaCvWNj25k5lT9i8J6HEpqyptn6aOhr_NKcynNEx_u2DRx_8OsACFRjk0'
+          instance_url: 'https://dev78278.service-now.com'
+          api_url: "https://api.qualityclouds.com"
