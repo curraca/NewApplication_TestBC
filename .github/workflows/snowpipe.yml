@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: QualityClouds CI/CD BuildCheck for Servicenow
-        uses: qualityclouds/action-snow-full-scan@0.0.6
+        uses: qualityclouds/action-application-scan@1.0.0
         with:
           token: ${{ secrets.QC_TOKEN }}
           instance_url: 'https://dev67759.service-now.com'
